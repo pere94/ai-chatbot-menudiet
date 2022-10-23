@@ -2,6 +2,7 @@
 import logo from "./img/plato.png";
 import "./App.css";
 import * as React from "react";
+import {postalCodesMadrid} from "./postalCodesMadrid";
 // import ListSubheader from "@mui/material/ListSubheader";
 // import List from "@mui/material/List";
 // import ListItemButton from "@mui/material/ListItemButton";
@@ -13,18 +14,7 @@ import * as React from "react";
 
 
 function App() {
-  // const pedido_pizza = {
-  //   tamano: "",
-  //   tipo_masa: "",
-  //   gluten: "",
-  //   salsa: "",
-  //   tipo_queso: "",
-  //   cant_queso: "",
-  //   ingredientes: [],
-  //   nombre: "",
-  //   telefono: "",
-  //   direccion: "",
-  // };
+
   // const [pedido, setPedido] = React.useState(pedido_pizza);
   // const [finPedido, setFinPedido] = React.useState(false);
   // const [open, setOpen] = React.useState(true);
@@ -39,6 +29,7 @@ function App() {
     // Handle event
 
     const response = event.detail.response.queryResult.parameters;
+    console.log("🚀 ~ file: App.js ~ line 42 ~ event.detail.response.queryResult", event.detail.response);
     console.log("🚀 ~ file: App.js ~ line 43 ~ response", response);
 
     if(response.pedido) {
@@ -64,7 +55,7 @@ function App() {
         window.open("https://www.menudiet.es/salud/", "_blank").focus();
       }
     }
-
+    
     if(response.ayuda) {
       if (response.ayuda === "info empresa MenuDiet") {
         window.open("https://www.menudiet.es/ayuda/sobre-la-empresa/", "_blank").focus();
@@ -72,8 +63,96 @@ function App() {
       if (response.ayuda === "info comida") {
         window.open("https://www.menudiet.es/ayuda/sobre-la-comida/", "_blank").focus();
       }
+      if (response.ayuda === "info menus semanales") {
+        window.open("https://www.menudiet.es/ayuda/sobre-los-menus-semanales/", "_blank").focus();
+      }
+      if (response.ayuda === "info platos a la carta") {
+        window.open("https://www.menudiet.es/ayuda/sobre-los-platos-a-la-carta/", "_blank").focus();
+      }
+      if (response.ayuda === "info menus de degustacion") {
+        window.open("https://www.menudiet.es/ayuda/sobre-los-menus-degustacion/", "_blank").focus();
+      }
+      if (response.ayuda === "info cuenta menudiet") {
+        window.open("https://www.menudiet.es/ayuda/sobre-mi-cuenta/", "_blank").focus();
+      }
+      if (response.ayuda === "info compra menudiet") {
+        window.open("https://www.menudiet.es/ayuda/comprando-en-menudiet/", "_blank").focus();
+      }
+      if (response.ayuda === "info entrega comida") {
+        window.open("https://www.menudiet.es/ayuda/recibiendo-mi-comida/", "_blank").focus();
+      }
+      if (response.ayuda === "preparado y conserva de comida") {
+        window.open("https://www.menudiet.es/ayuda/conservando-y-preparando-mi-comida/", "_blank").focus();
+      }
+      if (response.ayuda === "info salud app" || response.ayuda[0] === "info salud app") {
+        window.open("https://www.menudiet.es/ayuda/controlando-mi-salud/", "_blank").focus();
+      }
     }
 
+    
+    
+    if(response["zip-code"]) {
+      if (response["zip-code"] !== "") {
+        const zoneName = Object.values(postalCodesMadrid).filter(zone => zone.postalCode === response["zip-code"]);
+        if(zoneName[0].zone !== undefined) {
+          const dfMessenger = document.querySelector('df-messenger');
+          let payload = new Array([]);
+          payload = [
+            {
+              "title": `Perfecto, vives en ${zoneName[0].zone}. Tu entrega a domicilio puede ser procesada.`,
+              "type": "info"
+            },
+            {
+              "title": "¿Estás ya listo para hacer el pedido o quieres realizar otras acciones?",
+              "type": "info"
+            },
+            {
+              "options": [
+                {
+                  "text": "Empezar el pedido",
+                  "image": {
+                    "src": {
+                      "rawUrl": "https://cdn-icons-png.flaticon.com/512/590/590504.png"
+                    }
+                  }
+                },
+                {
+                  "text": "Consulta tu zona para el envio",
+                  "image": {
+                    "src": {
+                      "rawUrl": "https://cdn-icons-png.flaticon.com/512/471/471340.png"
+                    }
+                  }
+                },
+                {
+                  "image": {
+                    "src": {
+                      "rawUrl": "https://cdn-icons-png.flaticon.com/512/564/564744.png"
+                    }
+                  },
+                  "text": "¿Cómo funciona MenuDiet?"
+                },
+                {
+                  "text": "Centro de Ayuda",
+                  "image": {
+                    "src": {
+                      "rawUrl": "https://cdn-icons-png.flaticon.com/512/1246/1246331.png"
+                    }
+                  }
+                }
+              ],
+              "type": "chips"
+            }];
+          dfMessenger.renderCustomCard(payload);
+
+        }
+      } else {
+        const dfMessenger = document.querySelector('df-messenger');
+        dfMessenger.renderCustomText(`Desafortunadamente vives en una zona o país donde tu entrega no puede ser enviada a domicilio.`);
+      }
+      
+    }
+    
   });
 
   
