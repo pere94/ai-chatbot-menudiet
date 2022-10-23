@@ -29,8 +29,8 @@ function App() {
     // Handle event
 
     const response = event.detail.response.queryResult.parameters;
-    console.log("🚀 ~ file: App.js ~ line 42 ~ event.detail.response.queryResult", event.detail.response);
-    console.log("🚀 ~ file: App.js ~ line 43 ~ response", response);
+    // console.log("🚀 ~ file: App.js ~ line 42 ~ event.detail.response.queryResult", event.detail.response);
+    // console.log("🚀 ~ file: App.js ~ line 43 ~ response", response);
 
     if(response.pedido) {
       if (response.pedido === "menus semanales") {
@@ -93,7 +93,7 @@ function App() {
     
     if(response["zip-code"]) {
       if (response["zip-code"] !== "") {
-        const zoneName = Object.values(postalCodesMadrid).filter(zone => zone.postalCode === response["zip-code"]);
+        const zoneName = postalCodesMadrid.filter(zone => zone.postalCode === response["zip-code"]);
         if(zoneName[0].zone !== undefined) {
           const dfMessenger = document.querySelector('df-messenger');
           let payload = new Array([]);
