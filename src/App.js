@@ -92,9 +92,10 @@ function App() {
     
     
     if(response["zip-code"]) {
+      console.log("🚀 ~ file: App.js ~ line 95 ~ response[zip-code]", response["zip-code"]);
       if (response["zip-code"] !== "") {
         const zoneName = postalCodesMadrid.filter(zone => zone.postalCode === response["zip-code"]);
-        if(zoneName[0].zone !== undefined) {
+        if(zoneName[0] !== undefined) {
           const dfMessenger = document.querySelector('df-messenger');
           let payload = new Array([]);
           payload = [
@@ -145,6 +146,9 @@ function App() {
             }];
           dfMessenger.renderCustomCard(payload);
 
+        } else {
+          const dfMessenger = document.querySelector('df-messenger');
+          dfMessenger.renderCustomText(`Desafortunadamente vives en una zona o país donde tu entrega no puede ser enviada a domicilio.`);
         }
       } else {
         const dfMessenger = document.querySelector('df-messenger');
