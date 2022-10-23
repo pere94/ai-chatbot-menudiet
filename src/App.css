@@ -1,11 +1,33 @@
 .App {
+  width: 100vw;
+  height: 100vh;
   text-align: center;
+  background-color: rgba(0,0,0,0.7);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  color: white;
+  overflow-y: scroll;
 }
 
-.App-logo {
-  height: 40vmin;
+span {
+  color: white !important;
+}
+
+p {
+  text-align: left !important;
+}
+
+.App-logo {  
+  height: 270px;
+  width: 270px;
   pointer-events: none;
 }
+
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
@@ -14,18 +36,27 @@
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  position: absolute;
+  top: 20px;
+  left: 20px;
 }
 
 .App-link {
   color: #61dafb;
+}
+
+.df-messenger-chat-background-color{
+  background: red !important;
+}
+
+h1 {
+  font-size: 60px;
 }
 
 @keyframes App-logo-spin {

@@ -5,6 +5,12 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  width: 100vw;
+  height: 100vh;
+  background: url("https://img.freepik.com/free-photo/bowl-fresh-green-salad-hold-female-hands_1163-2253.jpg?w=996&t=st=1666452343~exp=1666452943~hmac=397ca53a9a9cff7ac70e103bb162d05e5dbae4f441fa0aaca7bc033af734bd98");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 code {
